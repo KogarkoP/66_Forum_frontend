@@ -1,7 +1,12 @@
 import styles from "@/styles/Home.module.css";
+import PageTemplate from "@/components/PageTemplate/PageTemplate";
 
 const MainPage = () => {
-  return <div>index</div>;
+  return (
+    <PageTemplate>
+      <div>index</div>
+    </PageTemplate>
+  );
 };
 
 export default MainPage;
