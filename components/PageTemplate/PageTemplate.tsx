@@ -8,11 +8,11 @@ type PageTemplateProps = {
 
 const PageTemplate = ({ children }: PageTemplateProps) => {
   return (
-    <>
+    <div className={styles.content_wrapper}>
       <Header />
       {children}
       <Footer />
-    </>
+    </div>
   );
 };
 

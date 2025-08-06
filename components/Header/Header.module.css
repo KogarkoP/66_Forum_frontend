@@ -37,15 +37,17 @@
 }
 
 .login a {
-  border: solid 1px;
+  border: solid 1px #1c475a;
+  background-color: #1c475a;
   padding: 0.75rem;
   border-radius: 20px;
   transition: 0.2s ease-in-out;
+  color: white;
 }
 
 .login:hover a {
-  color: #fff;
   background-color: #13aff0;
+  border-color: #13aff0;
 }
 
 .login svg {
