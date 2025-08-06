@@ -10,7 +10,7 @@ const PageTemplate = ({ children }: PageTemplateProps) => {
   return (
     <>
       <Header />
-      <div className={styles.wrapper}>{children}</div>
+      {children}
       <Footer />
     </>
   );

@@ -3,11 +3,12 @@
   align-items: center;
   justify-content: space-between;
   padding: 1rem;
+  border-bottom: 1px solid rgba(161, 161, 161, 0.404);
 }
 
 .logo_wrapper {
-  height: 100px;
-  width: 130px;
+  display: flex;
+  width: 100px;
 }
 
 .logo_wrapper img {
@@ -19,8 +20,34 @@
 .nav {
   list-style: none;
   display: flex;
-  gap: 1rem;
+  align-items: center;
+  gap: 1.5rem;
+  letter-spacing: 1px;
+  font-weight: 500;
+  font-size: 15px;
+  color: #1c475a;
 }
 
-.login {
+.nav li {
+  transition: 0.2s ease-in-out;
+}
+
+.nav li:hover {
+  color: #13aff0;
+}
+
+.login a {
+  border: solid 1px;
+  padding: 0.75rem;
+  border-radius: 20px;
+  transition: 0.2s ease-in-out;
+}
+
+.login:hover a {
+  color: #fff;
+  background-color: #13aff0;
+}
+
+.login svg {
+  margin-right: 0.25rem;
 }

@@ -4,7 +4,7 @@ import PageTemplate from "@/components/PageTemplate/PageTemplate";
 const MainPage = () => {
   return (
     <PageTemplate>
-      <div>index</div>
+      <div className={styles.main}>index</div>
     </PageTemplate>
   );
 };
