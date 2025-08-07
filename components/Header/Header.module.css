@@ -53,3 +53,103 @@
 .login svg {
   margin-right: 0.25rem;
 }
+
+.mobile_menu_bttn {
+  all: unset;
+  display: none;
+  cursor: pointer;
+}
+
+.mobile_menu_bttn svg {
+  width: 25px;
+  height: 25px;
+  color: #1c475a;
+}
+
+.mobile_menu_wrapper {
+  width: 100%;
+  height: 100vh;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: rgba(85, 81, 81, 0.39);
+}
+
+.mobile_menu {
+  position: relative;
+  max-width: 400px;
+  width: 100%;
+  background-color: #1c475a;
+  height: 100%;
+}
+
+.mobile_menu ul {
+  display: flex;
+  flex-direction: column;
+  list-style: none;
+}
+
+.mobile_menu li {
+  padding: 1rem;
+  line-height: 24px;
+  color: #fff;
+  border-bottom: 1px solid #cfcece3a;
+  transition: 0.2s ease-in-out;
+}
+
+.mobile_menu li a {
+  display: block;
+  letter-spacing: 1px;
+}
+
+.mobile_menu li:hover {
+  background-color: #286984;
+}
+
+.login_con {
+  background-color: black;
+  border-bottom: unset;
+}
+
+.login_con svg {
+  margin-right: 0.5rem;
+  width: 20px;
+  height: 20px;
+}
+
+.mobile_menu .login_con:hover {
+  background-color: #000;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.close_bttn {
+  position: absolute;
+  padding: 1rem;
+  right: 0;
+  top: 0;
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+  color: #fff;
+  transition: rotate 2s ease-in-out;
+}
+
+.close_bttn:hover {
+  rotate: 720deg;
+  scale: 1.1;
+}
+
+@media (max-width: 767px) {
+  .nav {
+    display: none;
+  }
+
+  .mobile_menu_bttn {
+    display: block;
+  }
+
+  .mobile_menu {
+    max-width: unset;
+  }
+}
