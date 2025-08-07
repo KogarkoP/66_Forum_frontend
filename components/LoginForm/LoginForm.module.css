@@ -92,3 +92,14 @@
 .register_con span:hover {
   color: #13aff0;
 }
+
+@media (max-width: 767px) {
+  .main {
+    padding: 2.5rem 2rem;
+  }
+
+  .register_con p {
+    font-size: 14px;
+    letter-spacing: 0.5px;
+  }
+}
