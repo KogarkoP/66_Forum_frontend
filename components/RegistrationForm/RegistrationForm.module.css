@@ -51,13 +51,47 @@
   letter-spacing: 0.5px;
 }
 
+.checkbox {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  gap: 0.75rem;
+  font-size: 14px;
+}
+
+.checkbox span {
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  font-weight: 500;
+  color: #1c475a;
+  transition: 0.2s ease-in-out;
+}
+
+.checkbox label {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.checkbox span:hover {
+  color: #13aff0;
+}
+
+.checkbox input {
+  width: 17px;
+  height: 17px;
+}
+
+.checkbox input:checked {
+  accent-color: green;
+}
+
 .main button {
   font-size: 16px;
   letter-spacing: 1px;
   font-weight: 500;
   width: 100%;
   padding: 0.6rem;
-  margin: 1rem 0;
+  margin-bottom: 0.5rem;
   border-radius: 9px;
   border: 1px solid #1c475a;
   background-color: #1c475a;
@@ -71,23 +105,23 @@
   border-color: #13aff0;
 }
 
-.register_con {
+.login_con {
   width: 100%;
   text-align: start;
 }
 
-.register_con p {
+.login_con p {
   font-size: 15px;
   letter-spacing: 0.75px;
 }
 
-.register_con span {
+.login_con span {
   font-weight: 500;
   margin-left: 0.5rem;
   color: #1c475a;
   transition: 0.2s ease-in-out;
 }
 
-.register_con span:hover {
+.login_con span:hover {
   color: #13aff0;
 }
