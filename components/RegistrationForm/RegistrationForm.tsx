@@ -29,7 +29,7 @@ const RegistrationForm = () => {
           </span>
           &
           <span>
-            <Link href={"/"}>Privacy</Link>
+            <Link href={"/"}>Privacy Policy</Link>
           </span>
         </label>
       </div>
