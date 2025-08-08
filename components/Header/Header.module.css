@@ -90,7 +90,6 @@
 }
 
 .mobile_menu li {
-  padding: 1rem;
   line-height: 24px;
   color: #fff;
   border-bottom: 1px solid #cfcece3a;
@@ -100,15 +99,22 @@
 .mobile_menu li a {
   display: block;
   letter-spacing: 1px;
+  padding: 1rem;
 }
 
-.mobile_menu li:hover {
+.mobile_menu li:not(:first-child):hover {
   background-color: #286984;
 }
 
-.login_con {
+.mobile_menu .login_con {
+  padding: 1rem;
   background-color: black;
   border-bottom: unset;
+}
+
+.mobile_menu .login_con a {
+  padding: 0;
+  width: 200px;
 }
 
 .login_con svg {
@@ -117,8 +123,7 @@
   height: 20px;
 }
 
-.mobile_menu .login_con:hover {
-  background-color: #000;
+.mobile_menu .login_con a:hover {
   text-decoration: underline;
   text-underline-offset: 2px;
 }
