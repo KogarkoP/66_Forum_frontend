@@ -1,0 +1,48 @@
+.heading {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.heading svg {
+  width: 45px;
+  height: 45px;
+  color: #1c475a;
+}
+
+.subtitle {
+  color: gray;
+  font-size: 14px;
+  letter-spacing: 0.75px;
+}
+
+.ask_question_con {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.greetings_con h2 {
+  font-size: 30px;
+}
+
+.ask_bttn {
+  display: flex;
+  align-items: center;
+  font-size: 15px;
+  letter-spacing: 1px;
+  font-weight: 500;
+  padding: 0 0.6rem;
+  border-radius: 20px;
+  border: 1px solid #1c475a;
+  background-color: #1c475a;
+  color: #fff;
+  cursor: pointer;
+  transition: 0.2s ease-in-out;
+  height: 40px;
+}
+
+.ask_bttn:hover {
+  background-color: #13aff0;
+  border-color: #13aff0;
+}
