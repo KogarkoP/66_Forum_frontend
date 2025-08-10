@@ -13,8 +13,7 @@ const QuestionForm = () => {
         <div className={styles.form_row}>
           <label htmlFor="title">Title</label>
           <p className={styles.subtitle}>
-            Explain what you mean as if you were directly asking someone a
-            question
+            Be specific and imagine you’re asking a question to another person.
           </p>
           <input id="title" type="text" placeholder="Title" />
         </div>
