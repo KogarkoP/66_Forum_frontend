@@ -6,6 +6,7 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { getUserById, getQuestionById } from "../api/fetch";
 import DetailedQuestion from "@/components/DetailedQuestion/DetailedQuestion";
+import AnswerForm from "@/components/AnswerForm/AnswerForm";
 
 const QuestionPage = () => {
   const router = useRouter();
@@ -42,6 +43,7 @@ const QuestionPage = () => {
         ) : (
           <p>loading...</p>
         )}
+        {question && <AnswerForm questionId={question.id} />}
       </div>
     </PageTemplate>
   );

@@ -10,7 +10,7 @@ const LoginForm = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isError, setError] = useState(false);
-  const [isLogedIn, setLogedIn] = useState(false);
+  const [isLoggedIn, setLoggedIn] = useState(false);
 
   const router = useRouter();
 
@@ -25,7 +25,7 @@ const LoginForm = () => {
 
       if (response.status === 200) {
         Cookies.set("@user_jwt", response.data.jwt);
-        setLogedIn(true);
+        setLoggedIn(true);
         setTimeout(() => router.push("/"), 3000);
       }
 
@@ -43,7 +43,7 @@ const LoginForm = () => {
           <p className={styles.error}>Your email or password is wrong</p>
         </ModalTemplate>
       )}
-      {isLogedIn && (
+      {isLoggedIn && (
         <ModalTemplate>
           <p className={styles.error}>Your are logedin</p>
         </ModalTemplate>

@@ -24,6 +24,13 @@ export const insertQuestion = async (question: QuestionInsert) => {
   return response;
 };
 
+export const deleteQuestionById = async (id: string) => {
+  const response = await axios.delete(`${BASE_URL}/questions/${id}`, {
+    headers: { Authorization: jwt },
+  });
+  return response;
+};
+
 export const getUserById = async (userId: string) => {
   const response = await axios.get(`${BASE_URL}/users/${userId}`);
   return response;
@@ -36,5 +43,15 @@ export const insertUser = async (user: UserInsert) => {
 
 export const login = async (logindata: { email: string; password: string }) => {
   const response = await axios.post(`${BASE_URL}/users/login`, logindata);
+  return response;
+};
+
+export const insertAnswer = async (answer: {
+  answer_text: string;
+  question_id: string;
+}) => {
+  const response = await axios.post(`${BASE_URL}/answers`, answer, {
+    headers: { Authorization: jwt },
+  });
   return response;
 };

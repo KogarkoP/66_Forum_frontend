@@ -42,8 +42,6 @@ const Question = ({
         <div className={styles.data_wrapper}>
           <ul>
             <li>Answers</li>
-            <li>Likes</li>
-            <li>Dislikes</li>
           </ul>
         </div>
         <h2>{title}</h2>
