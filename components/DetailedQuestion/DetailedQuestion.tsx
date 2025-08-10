@@ -5,19 +5,34 @@ import { useEffect, useState } from "react";
 import { deleteQuestionById } from "@/pages/api/fetch";
 import Cookies from "js-cookie";
 import { useRouter } from "next/router";
+import ModalTemplate from "../ModalTemplate/ModalTemplate";
+import Answers from "../Answers/Answers";
 
 type DetailedQuestionProps = {
   user: User;
   question: Question;
+  isShowMessage: boolean;
+  toggleMessage: () => void;
 };
 
-const DetailedQuestion = ({ user, question }: DetailedQuestionProps) => {
-  const jwt = Cookies.get("@user_jwt");
+const DetailedQuestion = ({
+  user,
+  question,
+  isShowMessage,
+  toggleMessage,
+}: DetailedQuestionProps) => {
   const router = useRouter();
-  const [isLoggedIn, setLoggedIn] = useState(false);
 
   const onDeleteQuestion = async (id: string) => {
     try {
+      const jwt = Cookies.get("@user_jwt");
+
+      if (!jwt) {
+        if (!jwt) {
+          toggleMessage();
+          return;
+        }
+      }
       const response = await deleteQuestionById(id);
       console.log(response);
 
@@ -29,21 +44,17 @@ const DetailedQuestion = ({ user, question }: DetailedQuestionProps) => {
     } catch (err) {}
   };
 
-  useEffect(() => {
-    if (jwt) {
-      setLoggedIn(true);
-    }
-  }, [jwt]);
-
   return (
-    <div>
-      {isLoggedIn && (
+    <>
+      {isShowMessage && <ModalTemplate>Li Li Li</ModalTemplate>}
+      <div>
         <button onClick={() => onDeleteQuestion(question.id)}>
           Delete Question
         </button>
-      )}
-      DetailedQuestion
-    </div>
+        DetailedQuestion
+      </div>
+      <Answers questionId={question.id} />
+    </>
   );
 };
 

@@ -12,6 +12,12 @@ const QuestionPage = () => {
   const router = useRouter();
   const [question, setQuestion] = useState<Question | null>(null);
   const [user, setUser] = useState<User | null>(null);
+  const [isShowMessage, setShowMessage] = useState(false);
+
+  const toggleMessage = () => {
+    setShowMessage(true);
+    setTimeout(() => setShowMessage(false), 3000);
+  };
 
   const fetchQuestion = async (id: string) => {
     const response = await getQuestionById(id);
@@ -39,11 +45,22 @@ const QuestionPage = () => {
     <PageTemplate>
       <div className={styles.main}>
         {question && user ? (
-          <DetailedQuestion question={question} user={user} />
+          <DetailedQuestion
+            question={question}
+            user={user}
+            isShowMessage={isShowMessage}
+            toggleMessage={toggleMessage}
+          />
         ) : (
           <p>loading...</p>
         )}
-        {question && <AnswerForm questionId={question.id} />}
+        {question && (
+          <AnswerForm
+            questionId={question.id}
+            isShowMessage={isShowMessage}
+            toggleMessage={toggleMessage}
+          />
+        )}
       </div>
     </PageTemplate>
   );

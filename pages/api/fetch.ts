@@ -55,3 +55,8 @@ export const insertAnswer = async (answer: {
   });
   return response;
 };
+
+export const getAnswersByQuestion = async (id: string) => {
+  const response = await axios.get(`${BASE_URL}/answers/question/${id}`);
+  return response;
+};
