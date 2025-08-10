@@ -5,3 +5,8 @@ export type Question = {
   user_id: string;
   createdAt: Date;
 };
+
+export type QuestionInsert = {
+  title: string;
+  question_text: string;
+};

@@ -1,5 +1,6 @@
 import axios from "axios";
 import { UserInsert } from "@/types/user";
+import { QuestionInsert } from "@/types/question";
 import Cookies from "js-cookie";
 
 const jwt = Cookies.get("@user_jwt");
@@ -13,6 +14,13 @@ export const getAllQuestions = async () => {
 
 export const getQuestionById = async (questionId: string) => {
   const response = await axios.get(`${BASE_URL}/questions/${questionId}`);
+  return response;
+};
+
+export const insertQuestion = async (question: QuestionInsert) => {
+  const response = await axios.post(`${BASE_URL}/questions`, question, {
+    headers: { Authorization: jwt },
+  });
   return response;
 };
 

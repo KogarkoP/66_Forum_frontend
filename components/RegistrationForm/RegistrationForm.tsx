@@ -2,7 +2,6 @@ import { useState } from "react";
 import { insertUser } from "@/pages/api/fetch";
 import styles from "./RegistrationForm.module.css";
 import Link from "next/link";
-import axios from "axios";
 
 const RegistrationForm = () => {
   const [name, setName] = useState("");

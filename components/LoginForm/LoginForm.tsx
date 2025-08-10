@@ -1,13 +1,18 @@
 import styles from "./LoginForm.module.css";
-import React, { useState } from "react";
-import Link from "next/link";
-import { login } from "@/pages/api/fetch";
 import Cookies from "js-cookie";
+import ModalTemplate from "../ModalTemplate/ModalTemplate";
+import Link from "next/link";
+import { useState } from "react";
+import { login } from "@/pages/api/fetch";
+import { useRouter } from "next/router";
 
 const LoginForm = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isError, setError] = useState(false);
+  const [isLogedIn, setLogedIn] = useState(false);
+
+  const router = useRouter();
 
   const onSubmit = async () => {
     try {
@@ -17,9 +22,15 @@ const LoginForm = () => {
       };
 
       const response = await login(loginData);
+
       if (response.status === 200) {
         Cookies.set("@user_jwt", response.data.jwt);
+        setLogedIn(true);
+        setTimeout(() => router.push("/"), 3000);
       }
+
+      setEmail("");
+      setPassword("");
     } catch (err) {
       setError(true);
     }
@@ -28,7 +39,14 @@ const LoginForm = () => {
   return (
     <>
       {isError && (
-        <p className={styles.error}>Your email or password is wrong</p>
+        <ModalTemplate>
+          <p className={styles.error}>Your email or password is wrong</p>
+        </ModalTemplate>
+      )}
+      {isLogedIn && (
+        <ModalTemplate>
+          <p className={styles.error}>Your are logedin</p>
+        </ModalTemplate>
       )}
       <div className={styles.main}>
         <h2>Login</h2>
