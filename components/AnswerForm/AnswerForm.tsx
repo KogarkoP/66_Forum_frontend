@@ -35,7 +35,7 @@ const AnswerForm = ({
     const response = await insertAnswer(answer);
     console.log(response);
 
-    await fetchAnswers(questionId);
+    fetchAnswers(questionId);
   };
 
   return (

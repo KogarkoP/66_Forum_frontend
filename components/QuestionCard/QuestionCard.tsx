@@ -10,6 +10,7 @@ type QuestionProps = {
   questionText: string;
   createdAt: Date;
   userId: string;
+  answersCount: number;
 };
 
 const Question = ({
@@ -18,6 +19,7 @@ const Question = ({
   questionText,
   createdAt,
   userId,
+  answersCount,
 }: QuestionProps) => {
   const [user, setUser] = useState<User | null>(null);
   const date = new Date(createdAt).toISOString().slice(0, 10);

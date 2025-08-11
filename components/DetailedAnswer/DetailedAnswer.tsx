@@ -24,7 +24,7 @@ const DetailedAnswer = ({
   updatedAt,
   fetchAnswers,
 }: DetailedAnswerProps) => {
-  const onDelete = async () => {
+  const onDeleteAnswer = async () => {
     const response = await deleteAnswerByID(id);
     console.log(response);
     fetchAnswers(questionId);
@@ -32,7 +32,7 @@ const DetailedAnswer = ({
 
   return (
     <>
-      <button onClick={onDelete}>Delete Answer</button>
+      <button onClick={onDeleteAnswer}>Delete Answer</button>
       <div>DetailedAnswer</div>
     </>
   );

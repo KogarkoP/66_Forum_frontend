@@ -3,6 +3,7 @@ export type Question = {
   title: string;
   question_text: string;
   user_id: string;
+  answers_count: number;
   createdAt: Date;
 };
 

@@ -1,5 +1,5 @@
 import styles from "./Answers.module.css";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Answer } from "@/types/answer";
 import DetailedAnswer from "../DetailedAnswer/DetailedAnswer";
 
