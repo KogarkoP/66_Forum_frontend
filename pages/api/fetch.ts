@@ -60,3 +60,10 @@ export const getAnswersByQuestion = async (id: string) => {
   const response = await axios.get(`${BASE_URL}/answers/question/${id}`);
   return response;
 };
+
+export const deleteAnswerByID = async (answerId: string) => {
+  const response = axios.delete(`${BASE_URL}/answers/${answerId}`, {
+    headers: { Authorization: jwt },
+  });
+  return response;
+};

@@ -19,7 +19,7 @@ const QuestionPage = () => {
   const [question, setQuestion] = useState<Question | null>(null);
   const [user, setUser] = useState<User | null>(null);
   const [isShowMessage, setShowMessage] = useState(false);
-  const [answers, setAnswers] = useState<Answer | null>(null);
+  const [answers, setAnswers] = useState<Answer[] | null>(null);
 
   const toggleMessage = () => {
     setShowMessage(true);
@@ -76,7 +76,7 @@ const QuestionPage = () => {
               toggleMessage={toggleMessage}
               fetchAnswers={fetchAnswers}
             />
-            <Answers answers={answers} />
+            <Answers answers={answers} fetchAnswers={fetchAnswers} />
           </>
         ) : (
           <p>Loading.....</p>
