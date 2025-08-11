@@ -53,7 +53,7 @@ const Questions = () => {
         </button>
       </div>
       <div className={styles.questions_wrapper}>
-        {filteredQuestions.map((q) => {
+        {[...filteredQuestions].reverse().map((q) => {
           return (
             <QuestionCard
               key={q.id}

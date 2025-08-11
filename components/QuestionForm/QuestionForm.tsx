@@ -25,9 +25,8 @@ const QuestionForm = () => {
 
     setTitle("");
     setQuestionText("");
-
-    console.log(response);
   };
+
   return (
     <>
       {isSubmited && <ModalTemplate>The question Was Submited</ModalTemplate>}

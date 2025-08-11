@@ -1,5 +1,5 @@
 import styles from "./Answers.module.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Answer } from "@/types/answer";
 import DetailedAnswer from "../DetailedAnswer/DetailedAnswer";
 
@@ -9,9 +9,19 @@ type AnswersProps = {
 };
 
 const Answers = ({ answers, fetchAnswers }: AnswersProps) => {
+  const [loggedInUserId, setLoggedInUserId] = useState("");
+
+  useEffect(() => {
+    const authenticatedInUserId = localStorage.getItem("userId");
+
+    if (authenticatedInUserId) {
+      setLoggedInUserId(authenticatedInUserId);
+    }
+  }, []);
+
   return (
     <div>
-      {answers.map((a) => {
+      {[...answers].reverse().map((a) => {
         return (
           <DetailedAnswer
             key={a.id}
@@ -23,6 +33,7 @@ const Answers = ({ answers, fetchAnswers }: AnswersProps) => {
             userId={a.user_id}
             createdAt={a.createdAt}
             updatedAt={a.updatedAt}
+            loggedInUserId={loggedInUserId}
             fetchAnswers={fetchAnswers}
           />
         );

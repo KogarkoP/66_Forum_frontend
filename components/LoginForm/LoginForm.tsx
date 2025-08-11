@@ -22,11 +22,14 @@ const LoginForm = () => {
       };
 
       const response = await login(loginData);
+      console.log(response);
 
       if (response.status === 200) {
         Cookies.set("@user_jwt", response.data.jwt);
+        const userId = response.data.user.id;
+        localStorage.setItem("userId", userId);
         setLoggedIn(true);
-        setTimeout(() => router.push("/"), 3000);
+        setTimeout(() => router.push("/"), 5000);
       }
 
       setEmail("");

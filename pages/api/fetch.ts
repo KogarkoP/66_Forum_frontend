@@ -67,3 +67,12 @@ export const deleteAnswerByID = async (answerId: string) => {
   });
   return response;
 };
+
+export const updateAnswerLikeDislike = async (
+  id: string,
+  task: { action: string; operation: string }
+) => {
+  return axios.put(`${BASE_URL}/answers/${id}`, task, {
+    headers: { Authorization: jwt },
+  });
+};
