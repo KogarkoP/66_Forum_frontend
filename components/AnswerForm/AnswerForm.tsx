@@ -8,12 +8,14 @@ type AnswerProps = {
   questionId: string;
   isShowMessage: boolean;
   toggleMessage: () => void;
+  fetchAnswers: (questionId: string) => void;
 };
 
 const AnswerForm = ({
   questionId,
   toggleMessage,
   isShowMessage,
+  fetchAnswers,
 }: AnswerProps) => {
   const [answerText, setAnswerText] = useState("");
 
@@ -32,6 +34,8 @@ const AnswerForm = ({
 
     const response = await insertAnswer(answer);
     console.log(response);
+
+    fetchAnswers(questionId);
   };
 
   return (

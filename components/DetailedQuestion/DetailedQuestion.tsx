@@ -6,7 +6,6 @@ import { deleteQuestionById } from "@/pages/api/fetch";
 import Cookies from "js-cookie";
 import { useRouter } from "next/router";
 import ModalTemplate from "../ModalTemplate/ModalTemplate";
-import Answers from "../Answers/Answers";
 
 type DetailedQuestionProps = {
   user: User;
@@ -53,7 +52,6 @@ const DetailedQuestion = ({
         </button>
         DetailedQuestion
       </div>
-      <Answers questionId={question.id} />
     </>
   );
 };

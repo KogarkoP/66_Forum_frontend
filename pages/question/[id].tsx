@@ -4,15 +4,22 @@ import { Question } from "@/types/question";
 import PageTemplate from "@/components/PageTemplate/PageTemplate";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import { getUserById, getQuestionById } from "../api/fetch";
+import {
+  getUserById,
+  getQuestionById,
+  getAnswersByQuestion,
+} from "../api/fetch";
 import DetailedQuestion from "@/components/DetailedQuestion/DetailedQuestion";
 import AnswerForm from "@/components/AnswerForm/AnswerForm";
+import Answers from "@/components/Answers/Answers";
+import { Answer } from "@/types/answer";
 
 const QuestionPage = () => {
   const router = useRouter();
   const [question, setQuestion] = useState<Question | null>(null);
   const [user, setUser] = useState<User | null>(null);
   const [isShowMessage, setShowMessage] = useState(false);
+  const [answers, setAnswers] = useState<Answer | null>(null);
 
   const toggleMessage = () => {
     setShowMessage(true);
@@ -29,6 +36,11 @@ const QuestionPage = () => {
     setUser(response.data.user);
   };
 
+  const fetchAnswers = async (questionId: string) => {
+    const response = await getAnswersByQuestion(questionId);
+    setAnswers(response.data.answers);
+  };
+
   useEffect(() => {
     if (router.query.id) {
       fetchQuestion(router.query.id as string);
@@ -41,25 +53,33 @@ const QuestionPage = () => {
     }
   }, [question?.user_id]);
 
+  useEffect(() => {
+    if (question?.id) {
+      fetchAnswers(question.id);
+    }
+  }, [question?.id]);
+
   return (
     <PageTemplate>
       <div className={styles.main}>
-        {question && user ? (
-          <DetailedQuestion
-            question={question}
-            user={user}
-            isShowMessage={isShowMessage}
-            toggleMessage={toggleMessage}
-          />
+        {question && user && answers ? (
+          <>
+            <DetailedQuestion
+              question={question}
+              user={user}
+              isShowMessage={isShowMessage}
+              toggleMessage={toggleMessage}
+            />
+            <AnswerForm
+              questionId={question.id}
+              isShowMessage={isShowMessage}
+              toggleMessage={toggleMessage}
+              fetchAnswers={fetchAnswers}
+            />
+            <Answers answers={answers} />
+          </>
         ) : (
-          <p>loading...</p>
-        )}
-        {question && (
-          <AnswerForm
-            questionId={question.id}
-            isShowMessage={isShowMessage}
-            toggleMessage={toggleMessage}
-          />
+          <p>Loading.....</p>
         )}
       </div>
     </PageTemplate>

@@ -1,21 +1,13 @@
 import styles from "./Answers.module.css";
 import { useEffect, useState } from "react";
 import { getAnswersByQuestion } from "@/pages/api/fetch";
+import { Answer } from "@/types/answer";
 
 type AnswersProps = {
-  questionId: string;
+  answers: Answer;
 };
 
-const Answers = ({ questionId }: AnswersProps) => {
-  const [answers, setAnswers] = useState([]);
-
-  const fetchAnswers = async (questionId: string) => {
-    const response = await getAnswersByQuestion(questionId);
-    setAnswers(response.data.answers);
-  };
-  useEffect(() => {
-    fetchAnswers(questionId);
-  }, []);
+const Answers = ({ answers }: AnswersProps) => {
   return (
     <div>
       {answers.map((a) => {
