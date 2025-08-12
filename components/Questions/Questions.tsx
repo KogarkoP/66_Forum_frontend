@@ -9,6 +9,11 @@ const Questions = () => {
   const [filter, setFilter] = useState<
     "All" | "withAnswers" | "withoutAnswers"
   >("All");
+  const withAnswersCount = questions.filter((q) => q.answers_count > 0).length;
+  const withoutAnswersCount = questions.filter(
+    (q) => q.answers_count <= 0
+  ).length;
+  const totalCount = questions.length;
 
   const fetchQuestions = async () => {
     const response = await getAllQuestions();
@@ -27,13 +32,13 @@ const Questions = () => {
       : questions;
 
   return (
-    <div className={styles.main}>
+    <>
       <div className={styles.button_wrapper}>
         <button
           className={filter === "All" ? styles.active : styles.not_active}
           onClick={() => setFilter("All")}
         >
-          All Questions
+          All Questions ({totalCount})
         </button>
         <button
           className={
@@ -41,7 +46,7 @@ const Questions = () => {
           }
           onClick={() => setFilter("withAnswers")}
         >
-          With Answers
+          With Answers ({withAnswersCount})
         </button>
         <button
           className={
@@ -49,7 +54,7 @@ const Questions = () => {
           }
           onClick={() => setFilter("withoutAnswers")}
         >
-          Without Answers
+          Without Answers ({withoutAnswersCount})
         </button>
       </div>
       <div className={styles.questions_wrapper}>
@@ -67,7 +72,7 @@ const Questions = () => {
           );
         })}
       </div>
-    </div>
+    </>
   );
 };
 

@@ -41,15 +41,23 @@ const Question = ({
   return (
     <Link href={`question/${id}`}>
       <div className={styles.main}>
-        <div className={styles.data_wrapper}>
-          <ul>
-            <li>Answers</li>
+        <div className={styles.wrapper}>
+          <ul className={styles.information}>
+            <li>
+              <span className={styles.count}>{answersCount}</span> Answers
+            </li>
           </ul>
         </div>
-        <h2>{title}</h2>
-        <p>{shortText}</p>
-        <small>Created by:{user?.name || "Unknown"}</small>
-        <small>Created at: {date}</small>
+        <div className={styles.content_wrapper}>
+          <div className={styles.text_wrapper}>
+            <h2>{title}</h2>
+            <p>{shortText}</p>
+          </div>
+          <div className={styles.data_wrapper}>
+            <small>Created by: {user?.name || "Unknown"}</small>
+            <small>Created at: {date}</small>
+          </div>
+        </div>
       </div>
     </Link>
   );

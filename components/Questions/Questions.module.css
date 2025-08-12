@@ -1,2 +1,33 @@
-.main {
+.questions_wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  margin: 3rem 0;
+}
+
+.button_wrapper {
+  display: flex;
+  gap: 2rem;
+  margin: 1rem 0 1rem 0;
+}
+
+.button_wrapper button {
+  padding: 0.75rem;
+  cursor: pointer;
+  transition: 0.2s ease-in-out;
+  border: none;
+  font-weight: 600;
+  font-size: 14px;
+  border-radius: 20px;
+  background-color: #1c475a;
+  color: #fff;
+  transition: 0.2s ease-in-out;
+}
+
+.button_wrapper button:hover {
+  scale: 1.1;
+}
+
+.button_wrapper .active {
+  background-color: #13aff0;
 }
