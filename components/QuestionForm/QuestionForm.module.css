@@ -87,3 +87,22 @@
   background-color: #13aff0;
   border-color: #13aff0;
 }
+
+.message {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.message .success {
+  color: green;
+  font-size: 60px;
+}
+
+.message p {
+  font-weight: 500;
+  color: green;
+  letter-spacing: 0.75px;
+}

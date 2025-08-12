@@ -2,6 +2,8 @@ import styles from "./LoginForm.module.css";
 import Cookies from "js-cookie";
 import ModalTemplate from "../ModalTemplate/ModalTemplate";
 import Link from "next/link";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCircleCheck } from "@fortawesome/free-regular-svg-icons";
 import { useState } from "react";
 import { login } from "@/pages/api/fetch";
 import { useRouter } from "next/router";
@@ -29,13 +31,14 @@ const LoginForm = () => {
         const userId = response.data.user.id;
         localStorage.setItem("userId", userId);
         setLoggedIn(true);
-        setTimeout(() => router.push("/"), 5000);
+        setTimeout(() => router.push("/"), 3000);
       }
-
+      console.log(response);
       setEmail("");
       setPassword("");
     } catch (err) {
       setError(true);
+      setTimeout(() => setError(false), 4000);
     }
   };
 
@@ -48,7 +51,10 @@ const LoginForm = () => {
       )}
       {isLoggedIn && (
         <ModalTemplate>
-          <p className={styles.error}>Your are logedin</p>
+          <div className={styles.message}>
+            <FontAwesomeIcon className={styles.success} icon={faCircleCheck} />
+            <p>You Have Successfully Logeed In</p>
+          </div>
         </ModalTemplate>
       )}
       <div className={styles.main}>

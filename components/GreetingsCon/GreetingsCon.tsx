@@ -1,4 +1,5 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import NotLoggedInMessage from "../NotLoggedInMessage/NotLoggedInMessage";
 import { faHandPeace } from "@fortawesome/free-solid-svg-icons";
 import Cookies from "js-cookie";
 import { useState } from "react";
@@ -12,7 +13,7 @@ const GreetingsCon = () => {
 
   const toggleMessage = () => {
     setShowMessage(true);
-    setTimeout(() => setShowMessage(false), 3000);
+    setTimeout(() => setShowMessage(false), 4000);
   };
 
   const onClick = () => {
@@ -27,7 +28,11 @@ const GreetingsCon = () => {
   };
   return (
     <>
-      {isShowMessage && <ModalTemplate>LiLiLI</ModalTemplate>}
+      {isShowMessage && (
+        <ModalTemplate>
+          <NotLoggedInMessage />
+        </ModalTemplate>
+      )}
       <div className={styles.ask_question_con}>
         <div className={styles.heading}>
           <FontAwesomeIcon icon={faHandPeace} />

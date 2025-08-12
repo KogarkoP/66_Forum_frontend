@@ -42,6 +42,11 @@
   margin-bottom: 1rem;
 }
 
+.text_wrapper p {
+  line-height: 24px;
+  letter-spacing: 0.5px;
+}
+
 .data_wrapper {
   display: flex;
   flex-direction: column;
@@ -50,4 +55,15 @@
   font-size: 14px;
   letter-spacing: 0.5px;
   align-items: flex-end;
+}
+
+@media (max-width: 767px) {
+  .text_wrapper h2 {
+    font-size: 17px;
+  }
+
+  .text_wrapper p {
+    line-height: 20px;
+    font-size: 15px;
+  }
 }

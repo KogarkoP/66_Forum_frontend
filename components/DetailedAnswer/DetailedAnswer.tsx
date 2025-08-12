@@ -5,6 +5,9 @@ import {
   getUserById,
   updateAnswerLikeDislike,
 } from "@/pages/api/fetch";
+import Cookies from "js-cookie";
+import ModalTemplate from "../ModalTemplate/ModalTemplate";
+import NotLoggedInMessage from "../NotLoggedInMessage/NotLoggedInMessage";
 
 type DetailedAnswerProps = {
   id: string;
@@ -32,8 +35,17 @@ const DetailedAnswer = ({
   fetchAnswers,
 }: DetailedAnswerProps) => {
   const [reactionStatus, setReactionStatus] = useState<string>("");
+  const [isDisplayMessage, setDisplayMessage] = useState(false);
 
   const onLikeDislike = async (type: string) => {
+    const jwt = Cookies.get("@user_jwt");
+
+    if (!jwt) {
+      setDisplayMessage(true);
+      setTimeout(() => setDisplayMessage(false), 4000);
+      return;
+    }
+
     const userResponse = await getUserById(loggedInUserId);
 
     const key = type === "like" ? "liked_answers_id" : "disliked_answers_id";
@@ -51,6 +63,13 @@ const DetailedAnswer = ({
   };
 
   const onDeleteAnswer = async () => {
+    const jwt = Cookies.get("@user_jwt");
+
+    if (!jwt) {
+      setDisplayMessage(true);
+      setTimeout(() => setDisplayMessage(false), 4000);
+      return;
+    }
     const response = await deleteAnswerByID(id);
     fetchAnswers(questionId);
   };
@@ -77,22 +96,37 @@ const DetailedAnswer = ({
 
   return (
     <>
-      <button onClick={onDeleteAnswer}>Delete Answer</button>
-      <div>{answerText}</div>
-      <button
-        className={reactionStatus === "liked" ? styles.liked : styles.default}
-        onClick={() => onLikeDislike("like")}
-      >
-        Like{likesCount}
-      </button>
-      <button
-        className={
-          reactionStatus === "disliked" ? styles.disliked : styles.default
-        }
-        onClick={() => onLikeDislike("dislike")}
-      >
-        Dislike{dislikesCount}
-      </button>
+      {isDisplayMessage && (
+        <ModalTemplate>
+          <NotLoggedInMessage />
+        </ModalTemplate>
+      )}
+      <div className={styles.main}>
+        <div>{answerText}</div>
+        <div className={styles.button_wrapper}>
+          <div className={styles.like_dislike_bttn}>
+            <button
+              className={
+                reactionStatus === "liked" ? styles.liked : styles.default
+              }
+              onClick={() => onLikeDislike("like")}
+            >
+              Like{likesCount}
+            </button>
+            <button
+              className={
+                reactionStatus === "disliked" ? styles.disliked : styles.default
+              }
+              onClick={() => onLikeDislike("dislike")}
+            >
+              Dislike{dislikesCount}
+            </button>
+          </div>
+          <div className={styles.delete_bttn_con}>
+            <button onClick={onDeleteAnswer}>Delete Answer</button>
+          </div>
+        </div>
+      </div>
     </>
   );
 };

@@ -3,8 +3,6 @@ import { UserInsert } from "@/types/user";
 import { QuestionInsert } from "@/types/question";
 import Cookies from "js-cookie";
 
-const jwt = Cookies.get("@user_jwt");
-
 const BASE_URL = "http://localhost:3005";
 
 export const getAllQuestions = async () => {
@@ -18,6 +16,7 @@ export const getQuestionById = async (questionId: string) => {
 };
 
 export const insertQuestion = async (question: QuestionInsert) => {
+  const jwt = Cookies.get("@user_jwt");
   const response = await axios.post(`${BASE_URL}/questions`, question, {
     headers: { Authorization: jwt },
   });
@@ -25,6 +24,7 @@ export const insertQuestion = async (question: QuestionInsert) => {
 };
 
 export const deleteQuestionById = async (id: string) => {
+  const jwt = Cookies.get("@user_jwt");
   const response = await axios.delete(`${BASE_URL}/questions/${id}`, {
     headers: { Authorization: jwt },
   });
@@ -50,6 +50,7 @@ export const insertAnswer = async (answer: {
   answer_text: string;
   question_id: string;
 }) => {
+  const jwt = Cookies.get("@user_jwt");
   const response = await axios.post(`${BASE_URL}/answers`, answer, {
     headers: { Authorization: jwt },
   });
@@ -62,6 +63,7 @@ export const getAnswersByQuestion = async (id: string) => {
 };
 
 export const deleteAnswerByID = async (answerId: string) => {
+  const jwt = Cookies.get("@user_jwt");
   const response = axios.delete(`${BASE_URL}/answers/${answerId}`, {
     headers: { Authorization: jwt },
   });
@@ -72,6 +74,7 @@ export const updateAnswerLikeDislike = async (
   id: string,
   task: { action: string; operation: string }
 ) => {
+  const jwt = Cookies.get("@user_jwt");
   return axios.put(`${BASE_URL}/answers/${id}`, task, {
     headers: { Authorization: jwt },
   });

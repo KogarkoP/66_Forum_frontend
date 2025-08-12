@@ -1,6 +1,7 @@
 import styles from "./QuestionForm.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGraduationCap } from "@fortawesome/free-solid-svg-icons";
+import { faCircleCheck } from "@fortawesome/free-regular-svg-icons";
 import { useState } from "react";
 import { insertQuestion } from "@/pages/api/fetch";
 import ModalTemplate from "../ModalTemplate/ModalTemplate";
@@ -8,7 +9,7 @@ import ModalTemplate from "../ModalTemplate/ModalTemplate";
 const QuestionForm = () => {
   const [title, setTitle] = useState("");
   const [questionText, setQuestionText] = useState("");
-  const [isSubmited, setSubmited] = useState(false);
+  const [isSubmitted, setSubmitted] = useState(false);
 
   const onSubmit = async () => {
     const question = {
@@ -19,8 +20,8 @@ const QuestionForm = () => {
     const response = await insertQuestion(question);
 
     if (response.status === 201) {
-      setSubmited(true);
-      setTimeout(() => setSubmited(false), 3000);
+      setSubmitted(true);
+      setTimeout(() => setSubmitted(false), 3000);
     }
 
     setTitle("");
@@ -29,7 +30,14 @@ const QuestionForm = () => {
 
   return (
     <>
-      {isSubmited && <ModalTemplate>The question Was Submited</ModalTemplate>}
+      {isSubmitted && (
+        <ModalTemplate>
+          <div className={styles.message}>
+            <FontAwesomeIcon className={styles.success} icon={faCircleCheck} />
+            <p>The Question was Submited</p>
+          </div>
+        </ModalTemplate>
+      )}
       <div className={styles.main}>
         <div className={styles.wrapper}>
           <h1>

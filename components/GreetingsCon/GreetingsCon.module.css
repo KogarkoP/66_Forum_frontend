@@ -19,6 +19,7 @@
 .ask_question_con {
   display: flex;
   justify-content: space-between;
+  gap: 0.5rem;
   align-items: center;
 }
 
@@ -40,9 +41,20 @@
   cursor: pointer;
   transition: 0.2s ease-in-out;
   height: 40px;
+  white-space: nowrap;
 }
 
 .ask_bttn:hover {
   background-color: #13aff0;
   border-color: #13aff0;
+}
+
+@media (max-width: 767px) {
+  .ask_question_con {
+    align-items: flex-start;
+  }
+
+  .heading svg {
+    display: none;
+  }
 }

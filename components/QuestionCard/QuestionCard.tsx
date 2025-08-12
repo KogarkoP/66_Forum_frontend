@@ -22,8 +22,10 @@ const Question = ({
   answersCount,
 }: QuestionProps) => {
   const [user, setUser] = useState<User | null>(null);
+  const [maxLength, setMaxLength] = useState(300);
+  const [screenWidth, setScreenWidth] = useState(0);
   const date = new Date(createdAt).toISOString().slice(0, 10);
-  const maxLength = 200;
+
   const shortText =
     questionText.length > maxLength
       ? `${questionText.slice(0, maxLength).trimEnd()}...`
@@ -37,6 +39,21 @@ const Question = ({
   useEffect(() => {
     fetchUser(userId);
   }, [userId]);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setScreenWidth(window.innerWidth);
+      setMaxLength(screenWidth < 520 ? 100 : 300);
+    };
+
+    handleResize();
+
+    window.addEventListener(`resize`, handleResize);
+
+    return () => {
+      window.removeEventListener(`resize`, handleResize);
+    };
+  });
 
   return (
     <Link href={`question/${id}`}>

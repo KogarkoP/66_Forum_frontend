@@ -6,26 +6,19 @@ import Cookies from "js-cookie";
 
 type AnswerProps = {
   questionId: string;
-  isShowMessage: boolean;
-  toggleMessage: () => void;
   fetchAnswers: (questionId: string) => void;
 };
 
-const AnswerForm = ({
-  questionId,
-  toggleMessage,
-  isShowMessage,
-  fetchAnswers,
-}: AnswerProps) => {
+const AnswerForm = ({ questionId, fetchAnswers }: AnswerProps) => {
   const [answerText, setAnswerText] = useState("");
 
   const onSubmit = async () => {
     const jwt = Cookies.get("@user_jwt");
 
-    if (!jwt) {
-      toggleMessage();
-      return;
-    }
+    // if (!jwt) {
+    //   toggleMessage();
+    //   return;
+    // }
 
     const answer = {
       answer_text: answerText,
@@ -40,7 +33,6 @@ const AnswerForm = ({
 
   return (
     <>
-      {isShowMessage && <ModalTemplate>LA la la</ModalTemplate>}
       <div className={styles.form_row}>
         <label htmlFor="answer">Your Answer</label>
         <textarea
