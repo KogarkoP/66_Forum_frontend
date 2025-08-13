@@ -3,6 +3,7 @@ import styles from "./AnswerForm.module.css";
 import { insertAnswer } from "@/pages/api/fetch";
 import ModalTemplate from "../ModalTemplate/ModalTemplate";
 import Cookies from "js-cookie";
+import NotLoggedInMessage from "../NotLoggedInMessage/NotLoggedInMessage";
 
 type AnswerProps = {
   questionId: string;
@@ -11,14 +12,16 @@ type AnswerProps = {
 
 const AnswerForm = ({ questionId, fetchAnswers }: AnswerProps) => {
   const [answerText, setAnswerText] = useState("");
+  const [isMessageDisplay, setMessageDisplay] = useState(false);
 
   const onSubmit = async () => {
     const jwt = Cookies.get("@user_jwt");
 
-    // if (!jwt) {
-    //   toggleMessage();
-    //   return;
-    // }
+    if (!jwt) {
+      setMessageDisplay(true);
+      setTimeout(() => setMessageDisplay(false), 4000);
+      return;
+    }
 
     const answer = {
       answer_text: answerText,
@@ -33,7 +36,12 @@ const AnswerForm = ({ questionId, fetchAnswers }: AnswerProps) => {
 
   return (
     <>
-      <div className={styles.form_row}>
+      {isMessageDisplay && (
+        <ModalTemplate>
+          <NotLoggedInMessage />
+        </ModalTemplate>
+      )}
+      <div className={styles.form}>
         <label htmlFor="answer">Your Answer</label>
         <textarea
           id="answer"

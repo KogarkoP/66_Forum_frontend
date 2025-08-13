@@ -70,7 +70,11 @@ const QuestionPage = () => {
               isShowMessage={isShowMessage}
               toggleMessage={toggleMessage}
             />
-            <Answers answers={answers} fetchAnswers={fetchAnswers} />
+            <Answers
+              answers={answers}
+              fetchAnswers={fetchAnswers}
+              answersCount={question.answers_count}
+            />
             <AnswerForm questionId={question.id} fetchAnswers={fetchAnswers} />
           </>
         ) : (

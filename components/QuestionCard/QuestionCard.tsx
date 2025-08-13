@@ -37,7 +37,9 @@ const Question = ({
   };
 
   useEffect(() => {
-    fetchUser(userId);
+    if (userId) {
+      fetchUser(userId);
+    }
   }, [userId]);
 
   useEffect(() => {

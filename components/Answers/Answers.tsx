@@ -5,10 +5,11 @@ import DetailedAnswer from "../DetailedAnswer/DetailedAnswer";
 
 type AnswersProps = {
   answers: Answer[];
+  answersCount: number;
   fetchAnswers: (questionId: string) => void;
 };
 
-const Answers = ({ answers, fetchAnswers }: AnswersProps) => {
+const Answers = ({ answers, answersCount, fetchAnswers }: AnswersProps) => {
   const [loggedInUserId, setLoggedInUserId] = useState("");
 
   useEffect(() => {
@@ -20,7 +21,10 @@ const Answers = ({ answers, fetchAnswers }: AnswersProps) => {
   }, []);
 
   return (
-    <div>
+    <div className={styles.main}>
+      <h2>
+        Answers <span className={styles.answers_count}>({answersCount})</span>
+      </h2>
       {[...answers].reverse().map((a) => {
         return (
           <DetailedAnswer
@@ -30,9 +34,8 @@ const Answers = ({ answers, fetchAnswers }: AnswersProps) => {
             likesCount={a.likes_count}
             dislikesCount={a.dislikes_count}
             questionId={a.question_id}
-            userId={a.user_id}
             createdAt={a.createdAt}
-            updatedAt={a.updatedAt}
+            userId={a.user_id}
             loggedInUserId={loggedInUserId}
             fetchAnswers={fetchAnswers}
           />
