@@ -144,6 +144,17 @@
   text-underline-offset: 2px;
 }
 
+.login_con button {
+  all: unset;
+  cursor: pointer;
+  width: 200px;
+}
+
+.login_con button:hover {
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
 .close_bttn {
   position: absolute;
   padding: 1rem;

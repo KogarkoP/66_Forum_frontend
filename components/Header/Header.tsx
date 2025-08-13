@@ -85,10 +85,17 @@ const Header = () => {
             />
             <ul>
               <li className={styles.login_con}>
-                <a href={"/login"}>
-                  <FontAwesomeIcon icon={faRightToBracket} />
-                  Login/Register
-                </a>
+                {isLoggedIn ? (
+                  <button onClick={onLogout}>
+                    <FontAwesomeIcon icon={faRightFromBracket} />
+                    Logout
+                  </button>
+                ) : (
+                  <a href={"/login"}>
+                    <FontAwesomeIcon icon={faRightToBracket} />
+                    Login/Register
+                  </a>
+                )}
               </li>
               <li>
                 <a href={"#"}>About Us</a>

@@ -1,7 +1,6 @@
 import styles from "./DetailedQuestion.module.css";
 import { User } from "@/types/user";
 import { Question } from "@/types/question";
-import { useEffect, useState } from "react";
 import { deleteQuestionById } from "@/pages/api/fetch";
 import Cookies from "js-cookie";
 import { useRouter } from "next/router";
@@ -36,9 +35,7 @@ const DetailedQuestion = ({
       const response = await deleteQuestionById(id);
 
       if (response.status === 200) {
-        setTimeout(() => {
-          router.push("/");
-        }, 2000);
+        router.push("/");
       }
     } catch (err) {}
   };

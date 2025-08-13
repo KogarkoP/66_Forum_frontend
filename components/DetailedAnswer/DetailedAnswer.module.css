@@ -6,6 +6,10 @@
   border-bottom: 1px solid rgba(128, 128, 128, 0.4);
 }
 
+.text {
+  line-height: 20px;
+}
+
 .button_wrapper {
   display: flex;
   justify-content: space-between;
@@ -67,4 +71,23 @@
   color: gray;
   font-size: 14px;
   letter-spacing: 0.5px;
+}
+
+.message {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.message svg {
+  color: green;
+  font-size: 60px;
+}
+
+.message p {
+  font-weight: 500;
+  color: green;
+  letter-spacing: 0.75px;
 }

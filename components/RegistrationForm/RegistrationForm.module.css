@@ -54,13 +54,21 @@
 
 .checkbox {
   display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  gap: 0.75rem;
+}
+
+.checkbox_wrapper {
+  display: flex;
   align-items: center;
   width: 100%;
   gap: 0.75rem;
   font-size: 14px;
 }
 
-.checkbox span {
+.checkbox_wrapper span {
   text-decoration: underline;
   text-underline-offset: 2px;
   font-weight: 500;
@@ -68,21 +76,21 @@
   transition: 0.2s ease-in-out;
 }
 
-.checkbox label {
+.checkbox_wrapper label {
   display: flex;
   gap: 0.5rem;
 }
 
-.checkbox span:hover {
+.checkbox_wrapper span:hover {
   color: #13aff0;
 }
 
-.checkbox input {
+.checkbox_wrapper input {
   width: 17px;
   height: 17px;
 }
 
-.checkbox input:checked {
+.checkbox_wrapper input:checked {
   accent-color: green;
 }
 
@@ -125,6 +133,14 @@
 
 .login_con span:hover {
   color: #13aff0;
+}
+
+.field_error {
+  color: red;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 17px;
+  letter-spacing: 0.5px;
 }
 
 @media (max-width: 767px) {

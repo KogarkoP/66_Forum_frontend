@@ -10,7 +10,11 @@ import Cookies from "js-cookie";
 import ModalTemplate from "../ModalTemplate/ModalTemplate";
 import NotLoggedInMessage from "../NotLoggedInMessage/NotLoggedInMessage";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faThumbsUp, faThumbsDown } from "@fortawesome/free-regular-svg-icons";
+import {
+  faThumbsUp,
+  faThumbsDown,
+  faCircleCheck,
+} from "@fortawesome/free-regular-svg-icons";
 
 type DetailedAnswerProps = {
   id: string;
@@ -36,45 +40,56 @@ const DetailedAnswer = ({
   fetchAnswers,
 }: DetailedAnswerProps) => {
   const [reactionStatus, setReactionStatus] = useState<string>("");
-  const [isDisplayMessage, setDisplayMessage] = useState(false);
+  const [isDisplayMessage, setDisplayMessage] = useState("");
   const [user, setUser] = useState<User | null>(null);
   const date = new Date(createdAt).toISOString().slice(0, 10);
 
   const onLikeDislike = async (type: string) => {
-    const jwt = Cookies.get("@user_jwt");
+    try {
+      const jwt = Cookies.get("@user_jwt");
 
-    if (!jwt) {
-      setDisplayMessage(true);
-      setTimeout(() => setDisplayMessage(false), 4000);
-      return;
-    }
+      if (!jwt) {
+        setDisplayMessage("error");
+        setTimeout(() => setDisplayMessage(""), 4000);
+        return;
+      }
 
-    const userResponse = await getUserById(loggedInUserId);
+      const userResponse = await getUserById(loggedInUserId);
 
-    const key = type === "like" ? "liked_answers_id" : "disliked_answers_id";
-    const hasReacted = userResponse.data.user[key].includes(id);
-    const operation = hasReacted ? "remove" : "add";
+      const key = type === "like" ? "liked_answers_id" : "disliked_answers_id";
+      const hasReacted = userResponse.data.user[key].includes(id);
+      const operation = hasReacted ? "remove" : "add";
 
-    const task = {
-      action: type,
-      operation: operation,
-    };
+      const task = {
+        action: type,
+        operation: operation,
+      };
 
-    await updateAnswerLikeDislike(id, task);
+      await updateAnswerLikeDislike(id, task);
 
-    fetchAnswers(questionId);
+      fetchAnswers(questionId);
+    } catch (err) {}
   };
 
   const onDeleteAnswer = async () => {
-    const jwt = Cookies.get("@user_jwt");
+    try {
+      const jwt = Cookies.get("@user_jwt");
 
-    if (!jwt) {
-      setDisplayMessage(true);
-      setTimeout(() => setDisplayMessage(false), 4000);
-      return;
-    }
-    const response = await deleteAnswerByID(id);
-    fetchAnswers(questionId);
+      if (!jwt) {
+        setDisplayMessage("error");
+        setTimeout(() => setDisplayMessage(""), 4000);
+        return;
+      }
+      const response = await deleteAnswerByID(id);
+
+      if (response.status === 200) {
+        fetchAnswers(questionId);
+        setDisplayMessage("success");
+        setTimeout(() => {
+          setDisplayMessage("");
+        }, 3000);
+      }
+    } catch (err) {}
   };
 
   const userExpression = useCallback(
@@ -94,7 +109,6 @@ const DetailedAnswer = ({
   const fetchUser = async (userId: string) => {
     const response = await getUserById(userId);
     setUser(response.data.user);
-    console.log(response);
   };
 
   useEffect(() => {
@@ -111,13 +125,21 @@ const DetailedAnswer = ({
 
   return (
     <>
-      {isDisplayMessage && (
+      {isDisplayMessage === "success" && (
+        <ModalTemplate>
+          <div className={styles.message}>
+            <FontAwesomeIcon className={styles.success} icon={faCircleCheck} />
+            <p>The Answer Was Submitted</p>
+          </div>
+        </ModalTemplate>
+      )}
+      {isDisplayMessage === "error" && (
         <ModalTemplate>
           <NotLoggedInMessage />
         </ModalTemplate>
       )}
       <div className={styles.main}>
-        <div>{answerText}</div>
+        <div className={styles.text}>{answerText}</div>
         <div className={styles.button_wrapper}>
           <div className={styles.like_dislike_bttn}>
             <button
