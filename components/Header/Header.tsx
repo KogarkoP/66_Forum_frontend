@@ -6,19 +6,37 @@ import {
   faRightToBracket,
   faBars,
   faXmark,
+  faRightFromBracket,
 } from "@fortawesome/free-solid-svg-icons";
 import { useEffect, useState } from "react";
+import Cookies from "js-cookie";
+import { useRouter } from "next/router";
 
 const Header = () => {
   const [isMenuOpen, setMenuOpen] = useState(false);
+  const [isLoggedIn, setLoggedIn] = useState(false);
+  const router = useRouter();
 
   const toggleMenu = () => {
     setMenuOpen((prevState) => !prevState);
   };
 
+  const onLogout = () => {
+    Cookies.remove("@user_jwt");
+    setLoggedIn(false);
+    router.reload();
+  };
+
   useEffect(() => {
     document.documentElement.style.overflow = isMenuOpen ? "hidden" : "";
   }, [isMenuOpen]);
+
+  useEffect(() => {
+    const jwt = Cookies.get("@user_jwt");
+    if (jwt) {
+      setLoggedIn(true);
+    }
+  }, []);
 
   return (
     <div className={styles.main}>
@@ -38,10 +56,17 @@ const Header = () => {
           <Link href={"#"}>Contact</Link>
         </li>
         <li className={styles.login}>
-          <Link href={"/login"}>
-            <FontAwesomeIcon icon={faRightToBracket} />
-            Login/Register
-          </Link>
+          {isLoggedIn ? (
+            <button onClick={onLogout}>
+              <FontAwesomeIcon icon={faRightFromBracket} />
+              Logout
+            </button>
+          ) : (
+            <Link href={"/login"}>
+              <FontAwesomeIcon icon={faRightToBracket} />
+              Login/Register
+            </Link>
+          )}
         </li>
       </ul>
       <button className={styles.mobile_menu_bttn} onClick={toggleMenu}>

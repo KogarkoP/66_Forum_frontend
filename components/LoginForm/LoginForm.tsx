@@ -18,6 +18,10 @@ const LoginForm = () => {
 
   const onSubmit = async () => {
     try {
+      if (!email || !password) {
+        return;
+      }
+
       const loginData = {
         email: email,
         password: password,
