@@ -87,7 +87,7 @@ const DetailedAnswer = ({
         setDisplayMessage("success");
         setTimeout(() => {
           setDisplayMessage("");
-        }, 3000);
+        }, 100000);
       }
     } catch (err) {}
   };
